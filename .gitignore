@@ -1,0 +1,6 @@
+.env
+*.http
+*.sqlite3
+*.prod.*
+
+.vscode

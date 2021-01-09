@@ -12,8 +12,6 @@ RUN npm run build
 
 FROM python:3.7-buster
 
-RUN apt update && apt install -y nginx
-
 COPY --from=ui-build /app/build/ /ui
 
 WORKDIR /app
@@ -24,6 +22,4 @@ RUN pip install -r requirements.txt
 
 COPY api/ /app/
 
-COPY nginx.conf /etc/nginx/nginx.conf
-
-CMD /app/run.sh
+CMD daphne -b 0.0.0.0 -p 80 api.asgi:application

@@ -24,9 +24,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = (os.environ["ENV"] == "DEV")
 
-ALLOWED_HOSTS = ["api.rappel.tech"]
+ALLOWED_HOSTS = []
+
+if DEBUG:
+    ALLOWED_HOSTS.append("localhost")
+else:
+    ALLOWED_HOSTS.append(os.environ["PROD_DOMAIN"])
 
 # Application definition
 
@@ -59,6 +64,7 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST = [
     'rappel.tech',
 ]
+CORS_ALLOW_ALL_ORIGINS = DEBUG
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (

@@ -1,7 +1,7 @@
 module.exports = {
-  API_BASE: "http://localhost:8000/api/",
-  REDIRECT_URI: "http://localhost:3000/onboard/github",
-  CLIENT_ID: "4d05938248442c4ceea4",
-  SCOPE: "repo",
-  STORAGE_NAME: "rapp3lCr3ds"
+  API_BASE: process.env.REACT_APP_API_BASE,
+  REDIRECT_URI: process.env.REACT_APP_REDIRECT_URI,
+  CLIENT_ID: process.env.REACT_APP_GH_CLIENT_ID,
+  SCOPE: process.env.REACT_APP_SCOPE,
+  STORAGE_NAME: process.env.REACT_APP_STORAGE_NAME,
 };

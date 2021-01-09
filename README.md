@@ -2,6 +2,8 @@
 
 An idea management tool, inspired from kanban boards and integrated with GitHub
 
+This repo only contains the backend for the app. Please check [sdabhi23/rappel-ui](https://github.com/sdabhi23/rappel-ui)
+
 ## Features
 
 - Automatically sync your GitHub repos
@@ -23,13 +25,7 @@ An idea management tool, inspired from kanban boards and integrated with GitHub
 - Integration with PyPI and NPM
 - Integration with GitLab
 
-## Development
-
-- Run the app locally using Docker
-
-  ```bash
-  ➜ docker run --rm -p 80:80 --env DJANGO_SECRET_KEY="-0cn(wy^w*!^ktl82_#%s)1p%90k8(8!8-yhhll5h1my13v3^#" rappel-tst
-  ```
+## Run locally using Docker
 
 - Generate dependency lists from Pipfile.lock using [jq tool](https://stedolan.github.io/jq/)
 
@@ -37,3 +33,39 @@ An idea management tool, inspired from kanban boards and integrated with GitHub
   ➜ jq -r '.default | to_entries[] | .key + .value.version' Pipfile.lock > requirements.txt
   ➜ jq -r '.develop | to_entries[] | .key + .value.version' Pipfile.lock > requirements-dev.txt
   ```
+
+- Run the app
+
+  ```bash
+  ➜ docker build -t rappel-tst .
+  ➜ docker-compose up -d
+  ➜ docker run -d --name rappel -p 80:80 --env-file sample.env rappel-tst
+  ➜ docker exec -it rappel python manage.py migrate
+  ```
+
+The api docs should be available at <http://localhost/api/schema/redoc/>
+
+## Run locally using Pipenv
+
+- Install dependencies using Pipenv
+
+  ```bash
+  ➜ pipenv install
+  ```
+
+- Run the app
+
+  ```bash
+  ➜ pipenv shell
+  ➜ cd api/
+  ➜ python manage.py migrate
+  ➜ python manage.py runserver
+  ```
+
+The api docs should be available at <http://localhost:8000/api/schema/redoc/>
+
+## Screenshots
+
+- API Docs
+
+  ![api-docs](screenshots/api-docs.png)

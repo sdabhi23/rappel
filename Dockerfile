@@ -10,6 +10,6 @@ RUN pip install -r requirements.txt
 
 COPY api/ /app/
 
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/nginx.conf
 
-CMD daphne -b 0.0.0.0 -p 80 api.asgi:application
+CMD ./run.sh

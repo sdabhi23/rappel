@@ -93,14 +93,15 @@ REST_FRAMEWORK = {
 
 SPECTACULAR_SETTINGS = {
     'TITLE': 'Rappel API',
-    'DESCRIPTION': 'A kanban inspired GitHub based project manager',
+    'DESCRIPTION': 'An idea management tool which is inspired from kanban boards and integrated with GitHub',
     'CONTACT': {
         "name": "Shrey Dabhi",
         "url": "https://sdabhi23.github.io",
         "email": "shrey.dabhi23@gmail.com"
     },
     'LICENSE': {
-        "name": "MIT"
+        "name": "Apache License 2.0",
+        "url": "https://github.com/sdabhi23/rappel/blob/master/LICENSE"
     },
     'VERSION': '0.1.0',
     'SCHEMA_PATH_PREFIX': r'/api',

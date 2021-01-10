@@ -1,0 +1,65 @@
+spec:
+  name: rappel-personal-api
+  databases:
+  - engine: PG
+    name: rappel-db
+    num_nodes: 1
+    size: db-s-dev-database
+    version: "12"
+  services:
+  - dockerfile_path: Dockerfile
+    envs:
+    - key: GITHUB_CLIENT_ID
+      scope: RUN_AND_BUILD_TIME
+      value: your-github-client-id
+    - key: GITHUB_CLIENT_SECRET
+      scope: RUN_AND_BUILD_TIME
+      value: your-github-client-secret
+    - key: PG_DB
+      scope: RUN_AND_BUILD_TIME
+      value: rappel-db
+    - key: PG_USER
+      scope: RUN_AND_BUILD_TIME
+      value: rappel-db
+    - key: PG_PASSWORD
+      scope: RUN_AND_BUILD_TIME
+      value: db_password
+    - key: PG_HOST
+      scope: RUN_AND_BUILD_TIME
+      value: dev-db-url.db.ondigitalocean.com
+    - key: PG_PORT
+      scope: RUN_AND_BUILD_TIME
+      value: "25060"
+    - key: DJANGO_SECRET_KEY
+      scope: RUN_AND_BUILD_TIME
+      value: -0cn(wy^w*!^ktl82_#%s)1p%90k8(8!8-yhhll5h1my13v3^#
+    - key: ENV
+      scope: RUN_AND_BUILD_TIME
+      value: PROD
+    - key: PROD_DOMAIN
+      scope: RUN_AND_BUILD_TIME
+      value: this-app-url.ondigitalocean.app
+    - key: PROD_UI_DOMAIN
+      scope: RUN_AND_BUILD_TIME
+      value: https://frontend-app-url.ondigitalocean.app
+    - key: DATABASE_URL
+      scope: RUN_TIME
+      value: ${rappel-db.DATABASE_URL}
+    git:
+      branch: master
+      repo_clone_url: https://github.com/sdabhi23/rappel.git
+    http_port: 80
+    instance_count: 1
+    instance_size_slug: basic-xs
+    name: rappel
+    routes:
+    - path: /
+  static_sites:
+  - dockerfile_path: Dockerfile
+    git:
+      branch: master
+      repo_clone_url: https://github.com/sdabhi23/rappel.git
+    name: static-files
+    output_dir: /app/static/
+    routes:
+    - path: /static
